@@ -1,4 +1,4 @@
-namespace api.Model
+namespace api.Contracts
 {
     public class CodeContract
     {
