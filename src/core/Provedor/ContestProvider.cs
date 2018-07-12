@@ -1,11 +1,11 @@
-namespace core.Provedor
+namespace CodeContest.Core.Provedor
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System;
 
-    using core.Model;
+    using CodeContest.Core.Model;
 
     using Dapper;
 
