@@ -1,15 +1,19 @@
-﻿namespace core.Delphi
+﻿namespace CodeContest.Core.Delphi
 {
     using System.Diagnostics;
     using System.IO;
     using System;
 
-    public class DelphiExecutor : IExecutor
+    using CodeContest.Core.Generics;
+
+    /// <inheritdoc />
+    public class DelphiExecutor : BaseExecutor, IExecutor
     {
-        public void DoTest(string code)
+        /// <summary>
+        /// Initializes a new instance of <see cref="DelphiExecutor"/>
+        /// </summary>
+        public DelphiExecutor() : base(new DelphiBuilder())
         {
-            var delphiBuilder = new DelphiBuilder();
-            delphiBuilder.Build(code);
-        }
+        }        
     }
 }

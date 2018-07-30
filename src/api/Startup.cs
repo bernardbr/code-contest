@@ -1,4 +1,4 @@
-﻿namespace api
+﻿namespace CodeContest.Api
 {
     using System.IO;
 
@@ -11,22 +11,36 @@
     using Newtonsoft.Json.Serialization;
     using Swashbuckle.AspNetCore.Swagger;
 
+    /// <summary>
+    /// The startup class of Api.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="Startup"/>.
+        /// </summary>
+        /// <param name="configuration">The configuration of Api.</param>
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Configures the services of Api.
+        /// </summary>
+        /// <param name="services">The services that will be configured.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new Info { Title = "API Code Contest", Version = "v1" });
-                    // c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml"));
+                    c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml"));
                 })
                 .AddSingleton<IConfiguration>(this.Configuration)
                 .AddMvc()                
@@ -39,7 +53,11 @@
                 });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The instance of <see cref="IApplicationBuilder"/>.</param>
+        /// <param name="env">The env.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

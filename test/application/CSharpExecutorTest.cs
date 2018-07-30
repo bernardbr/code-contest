@@ -1,54 +1,56 @@
 namespace CodeContest.Test.Application
 {
-    using core.Model;
-    using core.Service;
+    using System;
+
+    using CodeContest.Core;
+    using CodeContest.Core.CSharp;
     using NUnit.Framework;
 
     /// <summary>
-    /// Application tests for Contest.
+    /// The test application for <see cref="CSharpExecutor"/>.
     /// </summary>
     [TestFixture]
-    public class ContestTest
+    public class CSharpExecutorTest
     {
         /// <summary>
-        /// Test: Should add a contest.
+        /// Test: Should execute.
         /// </summary>
-        public void ShouldAddAContest()
+        [Test]
+        public void ShouldExecute()
         {
-            var contest = new Contest();
-            contest.ProblemDescription = "It's just a test";
-            contest.StartupProject = @"
+            const string code = @"
                 using System;
                 using System.IO;
 
                 class solveMeFirst
                 {
-                    public static long Sum(long first, long second) 
+                    public static long Sum(long first, long second)
                     {
                         return first + second;
                     }
 
-                    static void Main(String[] args) 
+                    static void Main(String[] args)
                     {
                         using (var textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable(""OUTPUT_PATH""), false))
                         {
                             long first = Convert.ToInt64(Console.ReadLine());
                             long second = Convert.ToInt64(Console.ReadLine());
-                            
+
                             textWriter.WriteLine(Sum(first, second));
                             textWriter.Flush();
-                            textWriter.Close();		
+                            textWriter.Close();
                         }
-                    }	
-                }            
+                    }
+                }
             ";
 
-            var contestService = new ContestService();
-            contestService.Add(contest);
+            var session = Guid.NewGuid().ToString();
 
-            Assert.IsNotNull(contest.Id);
-            Assert.IsNotNull(contest.PublicId);
+            IExecutor executor = new CSharpExecutor();
+            var ret = executor.Execute(session, code, int.MaxValue, "4\n5", out var output, out var message);
+            Assert.IsTrue(ret);
+            Assert.IsNotEmpty(output);
+            Assert.IsEmpty(message);
         }
-        
     }
 }

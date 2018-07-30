@@ -1,18 +1,18 @@
-﻿namespace api
+﻿namespace CodeContest.Api
 {
     using Microsoft.AspNetCore.Hosting;
 
     using Microsoft.AspNetCore;
 
     /// <summary>
-    /// Classe que representa a aplicação da API de Frontend.
+    /// The main class of Api..
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// Método principal da aplicação.
+        /// The main method.
         /// </summary>
-        /// <param name="args">Os argumentos da aplicação.</param>           
+        /// <param name="args">The args.</param>           
         public static void Main(string[] args)
         {
             WebHost

@@ -1,22 +1,22 @@
-namespace CodeContest.Core.Delphi
+namespace CodeContest.Core.CSharp
 {
     using System.Diagnostics;
     using System.IO;
-    using System;
+
     using CodeContest.Core.Generics;
 
-    /// <summary>
-    /// Delphi code builder.
-    /// </summary>
-    public class DelphiBuilder : BaseBuilder, IBuilder
+    /// <inheritdoc />
+    public class CSharpBuilder : BaseBuilder, IBuilder
     {
         /// <inheritdoc />
         protected override ProcessStartInfo GetBuilderProcessStartInfo(string path, string code, out string binaryPath)
         {
-            var file = $@"{path}\Console.dpr";
+            var file = $@"{path}\Console.cs";
             File.WriteAllText(file, code);
             binaryPath = $@"{path}\Console.exe";
-            return new ProcessStartInfo("dcc32.exe", file);
+            var args = $@"/out:{binaryPath} {file}";
+
+            return new ProcessStartInfo(@"C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe", args);
         }
     }
 }

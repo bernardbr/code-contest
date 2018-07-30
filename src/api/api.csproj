@@ -1,9 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>CodeContestApi</AssemblyName>
+    <PackageId>CodeContest.Api</PackageId>
+    <RootNamespace>CodeContest.Api</RootNamespace>
+    <GenerateFullPaths>true</GenerateFullPaths>
+    <OutputType>Exe</OutputType>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <Version>1.0.0.0</Version>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Bernardo Esbérard</Authors>
+    <Company>Alterdata Software</Company>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyTitle>CodeContest.Api</AssemblyTitle>
+    <Description>
+      API of code contest.
+    </Description>
+    <Copyright></Copyright>
+    <UserSecretsId>Alterdata Software</UserSecretsId>
+  </PropertyGroup>
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <ItemGroup>
+      <DocFile Include="bin\$(Configuration)\$(TargetFramework)\*.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
   <ItemGroup>
-    <Folder Include="wwwroot\"/>
+    <Folder Include="wwwroot\" />
+    <None Update="wwwroot\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8"/>
