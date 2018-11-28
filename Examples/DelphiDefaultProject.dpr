@@ -1,4 +1,4 @@
-program Console;
+program DelphiDefaultProject;
 {$APPTYPE CONSOLE}
 
 uses
