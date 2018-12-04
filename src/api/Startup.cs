@@ -40,7 +40,7 @@
                 .AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new Info { Title = "API Code Contest", Version = "v1" });
-                    c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml"));
+                    c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "CodeContestApi.xml"));
                 })
                 .AddSingleton<IConfiguration>(this.Configuration)
                 .AddMvc()                

@@ -19,8 +19,8 @@
     <Company>Alterdata Software</Company>
     <NeutralLanguage>en-US</NeutralLanguage>
     <AssemblyTitle>CodeContest.Api</AssemblyTitle>
-    <Description>&#xD;
-      API of code contest.&#xD;
+    <Description>
+      API of code contest.
     </Description>
     <Copyright/>
     <UserSecretsId>Alterdata Software</UserSecretsId>

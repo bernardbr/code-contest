@@ -19,8 +19,8 @@
     <Company>Alterdata Software</Company>
     <NeutralLanguage>en-US</NeutralLanguage>
     <AssemblyTitle>CodeContest.Core</AssemblyTitle>
-    <Description>&#xD;
-      Code contest core logic.&#xD;
+    <Description>
+      Code contest core logic.
     </Description>
     <Copyright/>
     <UserSecretsId>Alterdata Software</UserSecretsId>
@@ -28,5 +28,8 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5"/>
     <PackageReference Include="Npgsql" Version="4.0.3"/>
+    <PackageReference Include="MongoDB.Driver" Version="2.7.2"/>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.1.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1"/>
   </ItemGroup>
 </Project>
