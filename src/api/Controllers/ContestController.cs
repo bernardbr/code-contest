@@ -2,6 +2,7 @@ namespace CodeContest.Api.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using CodeContest.Api.Contracts;
     using CodeContest.Core.Domain.Model;
     using CodeContest.Core.Provider;
     using Microsoft.AspNetCore.Mvc;
@@ -22,24 +23,24 @@ namespace CodeContest.Api.Controllers
         /// <summary>
         /// Initializes a new instance of <see cref="ContestController" />.
         /// </summary>
-        public ContestController(IConfiguration configuration) 
-        { 
+        public ContestController(IConfiguration configuration)
+        {
             this.contestProvider = new ContestProvider(configuration);
         }
 
         /// <summary>
         /// Adds a new contest.
         /// </summary>
-        /// <param name="title">The contest title.</param>
-        /// <param name="description">The contest description.</param>
-        /// <returns>The id of new object.</returns>
+        /// <param name="contestContract">The contest contract.</param>
+        /// <returns>The id of new contest.</returns>
         [HttpPost("")]
-        public Guid Post(string title, string description)
+        public Guid Post([FromBody]ContestContract contestContract)
         {
             var contest = new Contest();
             contest.Id = Guid.NewGuid();
-            contest.Title = title;
-            contest.Description = description;
+            contest.Title = contestContract.Title;
+            contest.Description = contestContract.Description;
+            contest.StartupCode = contestContract.StartupCode ?? new List<StartupCode>();
             contest.Active = false;
 
             this.contestProvider.Entities.InsertOne(contest);
@@ -51,9 +52,9 @@ namespace CodeContest.Api.Controllers
         /// Gets all active contests.
         /// </summary>
         /// <returns>All active contests.</returns>
-        
-        [HttpGet("active")]
-        public IEnumerable<Contest> GetActive()
+
+        [HttpGet("actives")]
+        public IEnumerable<Contest> GetActives()
         {
             return this.contestProvider.Entities.FindSync(c => c.Active).ToList();
         }

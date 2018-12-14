@@ -2,11 +2,13 @@ namespace CodeContest.Core.Provider
 {
     using CodeContest.Core.Domain.Model;
     using CodeContest.Core.MongoDb;
+
     using Microsoft.Extensions.Configuration;
+
     using MongoDB.Driver;
 
     /// <summary>
-    /// The contest provider.
+    /// The <see cref="Contest" /> provider.
     /// </summary>
     public class ContestProvider : MongoDbContext<Contest>
     {
